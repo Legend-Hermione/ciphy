@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+
+        <title>Caesar cipher decryption tool </title>
+
+        <!-- 1688091751 -->
+
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="theme-color" content="#ffffff">
+
+        
+        <style>@font-face {
+    font-family: 'Libre Baskerville';
+    src: url(/fonts/LibreBaskerville-Regular.ttf);
+  }
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family:'Libre Baskerville', serif;
+    margin:0;
+    padding:0;
+}
+
+a {
+    color: #c00;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+ol a, ul a {
+    font-weight:normal;
+}
+
+img {
+    border: 0px none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.icons {
+    text-align: right;
+    padding-right: 10px;
+}
+
+.icons svg {
+    outline: 5px solid #777;
+    background: #777;
+    margin: 6px;
+    border:0;
+}
+
+nav {
+    border-bottom: 1px solid #777;
+    font-size: 13px;
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+}
+
+nav ul {
+    list-style: none;
+    margin:0;
+    padding:0;
+}
+
+nav li {
+    margin: 0;
+    padding: 0;
+    display: inline;
+    margin-right: 20px;
+    padding-bottom: 5px
+}
+
+nav li a {
+    color: #777;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.conti {
+    text-align: center;
+    border-bottom: 1px solid #777;
+}
+
+.conti a {
+    color: #666;
+    text-transform: uppercase;
+    font-size: 12px;
+    display: block;
+    padding: 5px;
+}
+
+nav li.active {
+    border-bottom: 1px solid #222;
+}
+
+nav li.active a {
+    color:#222;
+    font-weight:bold;
+}
+
+main {
+    display: block;
+    margin-left: 0px;
+    flex: 1;
+    padding: 20px 20px ;
+}
+
+main h1 {
+    font-weight:400;
+    font-size:37px;
+    margin:0;
+}
+
+main h1 a, main h2 a, main h3 a{
+    color: #222;
+}
+
+article {
+    margin-top:60px;
+    max-width: 820px;
+}
+
+article time {
+    color:#777;
+    display: block;
+    margin-top: 3px;
+    margin-bottom: 8px;
+    font-size: 15px;
+    padding-bottom:10px;
+    line-height:1.2;
+    font-family: Arial;
+}
+
+article time a {
+    color: #666;
+}
+
+article p, article li {
+    color:#222;
+    line-height:1.5;
+    font-size:19px;
+}
+
+aside {
+    padding-top:20px;
+    text-align: center;
+    background: #000;
+    color: #fff;
+}
+
+#sidebar {
+    padding-bottom: 15px;
+}
+
+#sidebar p {
+    font-weight:bold;
+    margin:0;
+    font-size:13px;
+    margin-bottom: 12px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+#sidebar a {
+    font-size:37px;
+    color:white;
+    text-decoration:none
+}
+
+textarea {
+    resize:vertical;
+    width: 100%
+}
+
+input {
+    width: 60%;
+    padding: 4px;
+}
+
+#comments img {
+    border: 0px none;
+    padding: 0px;
+}
+
+#comments h3, form h3 {
+
+    font-size: 23px;
+    margin-top: 40px;
+}
+
+#comments .comments {
+    margin-top: 30px;
+}
+
+#comments time {
+    display:inline;
+    padding: 0;
+    margin:0;
+}
+
+main h2 {
+    font-size: 28px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+main h3 {
+    font-size: 26px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+main h4 {
+    font-size: 24px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+main img {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+main ul {
+    list-style-type:square;
+}
+
+main pre {
+    color: white;
+    background: #211;
+    border-radius: 8px;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 13px;
+}
+
+main .button {
+    text-align:center;
+    margin:30px;
+}
+
+main .button a {
+    color: white;
+    padding: 10px 30px;
+    text-decoration: none;
+    border-radius: 8px;
+    box-shadow: 0px 1px 3px #666666;
+    text-shadow: 0px 1px 3px #666666;
+    border: solid #c00 2px;
+    background: linear-gradient(to bottom, #f00, #811);
+    font-family: Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+
+@media (min-width: 50em) {
+    aside {
+        top: 0;
+        left: 0;
+        position:fixed;
+        width: 17em;
+        height: 100%;
+    }
+
+    main {
+        margin-left:17em;
+    }
+
+    #sidebar {
+        position:absolute;
+        bottom:30px;
+    }
+}
+
+@media (min-width: 68em) {
+
+    main h1 {
+        font-size:47px;
+    }
+
+    main {
+        padding: 20px 100px ;
+    }
+}
+
+.unicode {
+    font-family: 'Code2000','Sun-ExtA','Arial Unicode MS','NSimSun',sans-serif;
+}
+
+pre .str, code .str { color: #65B042; } /* string  - green */
+pre .kwd, code .kwd { color: #E28964; } /* keyword - dark pink */
+pre .com, code .com { color: #AEAEAE; font-style: italic; } /* comment - gray */
+pre .typ, code .typ { color: #89bdff; } /* type - light blue */
+pre .lit, code .lit { color: #3387CC; } /* literal - blue */
+pre .pun, code .pun { color: #fff; } /* punctuation - white */
+pre .pln, code .pln { color: #fff; } /* plaintext - white */
+pre .tag, code .tag { color: #89bdff; } /* html/xml tag    - light blue */
+pre .atn, code .atn { color: #bdb76b; } /* html/xml attribute name  - khaki */
+pre .atv, code .atv { color: #65B042; } /* html/xml attribute value - green */
+pre .dec, code .dec { color: #3387CC; } /* decimal - blue */
+
+pre.prettyprint, code.prettyprint {
+    background-color: #000;
+    border-radius: 8px;
+}
+
+pre.prettyprint {
+    width: 100%;
+    padding: 2em;
+    white-space: pre-wrap;
+}
+
+</style>
+
+        <link rel="pingback" href="/pingback/">
+
+        <meta name="robots" content="index,follow">
+
+        <meta name="referrer" content="origin"> 
+
+        <meta name="description" content="A simple Caesar cipher tool with PHP source code.">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="alternate" type="application/rss+xml" title="Computer Science and Machine Learning" href="https://www.xarg.org/feed/">
+
+        <link rel="canonical" href="https://www.xarg.org/tools/caesar-cipher/">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-1101037-2"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","UA-1101037-2");</script></head>
+
+    <body>
+
+        <main>
+
+            
+    <article>
+<div>
+	<form action="" method="post">
+
+	<div style="float:left;padding-right:10px;">
+	<div>
+		Use key:
+		<select name="key">
+		<option value="0">0</option>
+        
+
+							        			<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13" selected="selected">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+					<option value="20">20</option>
+					<option value="21">21</option>
+					<option value="22">22</option>
+					<option value="23">23</option>
+					<option value="24">24</option>
+					<option value="25">25</option>
+				</select>
+    <div id="canvas" style="padding: 10px;"></div>
+
+	</div>
+
+	<div class="clear"></div>
+	</form>
+</div>
+        </article>
+
+    </div>
+
+    <script>
+
+    var canvas = document.getElementById("canvas");
+    var select = document.getElementsByTagName("select")[0];
+
+    var height = 204;
+    var width = 204;
+
+    var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute('width', width);
+    svg.setAttribute('height', height);
+    svg.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:xlink", "http://www.w3.org/1999/xlink");
+
+    var create = function(type, param) {
+
+      var o = document.createElementNS('http://www.w3.org/2000/svg', type);
+
+      for (var i in param) {
+        o.setAttribute(i, param[i]);
+      }
+      return o;
+    }
+
+    var circle = create("circle", {cx: width/2, cy: height/2, r: 100, fill: "none", stroke: "#111", "stroke-width": 2});
+    svg.appendChild(circle);
+
+    var circle = create("circle", {cx: width/2, cy: height/2, r: 80, fill: "#efefef", stroke: "#111", "stroke-width": 2});
+    svg.appendChild(circle);
+
+    var circle = create("circle", {cx: width/2, cy: height/2, r: 62, fill: "white", stroke: "#111", "stroke-width": 2});
+    svg.appendChild(circle);
+
+    var circle = create("circle", {cx: width/2, cy: height/2, r: 7, fill: "black", stroke: "none"});
+    svg.appendChild(circle);
+
+    var group = create("g", {});
+    var P = [];
+    var off = 1 / 26 * 360;
+    for (var i = 0; i < 26; i++) {
+
+    	var alpha = i / 26 * Math.PI * 2;
+    	var x = Math.cos(alpha) * 86 + width/2;
+    	var y = Math.sin(alpha) * 86 + height/2;
+    	var text = create("text", {style: "font-size:14px; fill: #17105a", transform: "translate("+x+", "+y+")rotate("+(alpha + Math.PI/2)/Math.PI*180+")"});
+    	text.textContent = String.fromCharCode(i + 65);
+    	group.appendChild(text);
+
+    	P.push("M");
+    	P.push(Math.cos(alpha - off) * 80 + width/2);
+    	P.push(Math.sin(alpha - off) * 80 + height/2);
+    	P.push("L");
+    	P.push(Math.cos(alpha - off) * 100 + width/2);
+      P.push(Math.sin(alpha - off) * 100 + height/2);
+    }
+    svg.appendChild(group);
+
+    var path = create("path", {d: P.join(" "), stroke: "#111"});
+    svg.appendChild(path);
+
+    select.onchange = function(ev) {
+    	state.dr = (26 - ev.target.value ) / 26 * 360;
+    };
+
+    var group = create("g", {});
+    var P = [];
+    for (var i = 0; i < 26; i++) {
+      var alpha = i / 26 * Math.PI * 2;
+      var x = Math.cos(alpha) * 67 + width/2;
+      var y = Math.sin(alpha) * 67 + height/2;
+      var text = create("text", {style: "font-size:12px; fill: #211690", transform: "translate("+x+", "+y+")rotate("+(alpha + Math.PI/2)/Math.PI*180+")"});
+      text.textContent = String.fromCharCode(i + 65);
+      group.appendChild(text);
+
+      P.push("M");
+      P.push(Math.cos(alpha - off) * 80 + width/2);
+      P.push(Math.sin(alpha - off) * 80 + height/2);
+      P.push("L");
+      P.push(Math.cos(alpha - off) * 62 + width/2);
+      P.push(Math.sin(alpha - off) * 62 + height/2);
+    }
+    var path = create("path", {d: P.join(" "), stroke: "#111"});
+    group.appendChild(path);
+    svg.appendChild(group);
+
+    canvas.appendChild(svg);
+
+    var state = {init: false,
+    	r: (26 - 13) / 26 * 360,
+    	dr: (26 - 13) / 26 * 360
+    };
+
+    function loop() {
+    	if (Math.abs(state.r - state.dr) > 1e-2 || !state.init) {
+    		group.setAttribute("transform", "translate("+(width/2)+", "+(height/2)+")rotate("+state.r+")translate("+(-width/2)+", "+(-height/2)+")");
+        state.init = true;
+    	}
+    	state.r+= (state.dr - state.r) * 0.1;
+      window.requestAnimationFrame(loop);
+    }
+    window.requestAnimationFrame(loop);
+
+    </script>
+        </main>
+
+    </body>
+</html>
